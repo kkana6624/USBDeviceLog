@@ -1,0 +1,144 @@
+@implements IDisposable
+@inject UsbDeviceService UsbService
+
+<div class="app-container">
+    <header>
+        <h1>USB Device Log</h1>
+        <button class="btn-primary" @onclick="RefreshDevices">
+            <span class="icon">↻</span> Refresh Devices
+        </button>
+    </header>
+
+    @if (isLoading)
+    {
+        <div class="initial-loader" style="flex: 1;">
+            <div class="spinner"></div>
+            <p>Scanning USB ports...</p>
+        </div>
+    }
+    else
+    {
+        <div class="content-wrapper">
+            <!-- Current Devices Section -->
+            <div class="devices-section">
+                <h2 class="section-title">Current Devices</h2>
+                
+                @if (devices == null || !devices.Any())
+                {
+                    <div class="empty-state">
+                        <h3>No USB devices detected</h3>
+                        <p style="color: var(--text-secondary)">Try plugging in a device or refreshing the list.</p>
+                    </div>
+                }
+                else
+                {
+                    <div class="device-list">
+                        @foreach (var device in devices)
+                        {
+                            <div class="device-card">
+                                <h2 class="device-name">@device.Name</h2>
+                                
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span class="status-badge">@device.Status</span>
+                                    @if (!string.IsNullOrEmpty(device.Description))
+                                    {
+                                        <span style="font-size: 0.8rem; color: var(--text-secondary)">@device.Description</span>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+
+            <!-- History Log Section -->
+            <div class="history-section">
+                <h2 class="section-title">Connection History</h2>
+                
+                <div class="history-list">
+                    @if (!HistoryLogs.Any())
+                    {
+                        <div class="empty-state" style="padding: 2rem; border-color: transparent;">
+                            <p style="color: var(--text-secondary); margin: 0; font-family: 'Outfit', sans-serif;">起動後の着脱履歴はまだありません。デバイスを抜き差しするとここに記録されます。</p>
+                        </div>
+                    }
+                    else
+                    {
+                        @foreach (var log in HistoryLogs)
+                        {
+                            bool isConnected = log.Action == UsbActionType.Connected;
+                            <div class="history-item @(isConnected ? "connected" : "disconnected")">
+                                <div class="history-icon">
+                                    @(isConnected ? "🔌" : "❌")
+                                </div>
+                                <div class="history-content">
+                                    <div class="history-time">@log.Timestamp.ToString("yyyy/MM/dd HH:mm:ss")</div>
+                                    <h3 class="history-name">@log.Device.Name</h3>
+                                </div>
+                                <div class="history-action-badge">
+                                    @log.Action.ToString()
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    private List<UsbDeviceInfo> devices = new();
+    private List<UsbLogEntry> HistoryLogs => UsbService.HistoryLogs;
+    private bool isLoading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Subscribe to real-time OS updates
+        UsbService.OnHistoryUpdated += HandleHistoryUpdated;
+        
+        // Initial scan
+        await RefreshDevicesAsync();
+        
+        isLoading = false;
+        StateHasChanged();
+    }
+
+    private void HandleHistoryUpdated()
+    {
+        // Must marshal back to UI thread in Blazor
+        InvokeAsync(() =>
+        {
+            devices = UsbService.CurrentDevices;
+            StateHasChanged();
+        });
+    }
+
+    private async Task RefreshDevices()
+    {
+        isLoading = true;
+        StateHasChanged();
+
+        await Task.Delay(400); // Visual UX feedback
+        await RefreshDevicesAsync();
+        
+        isLoading = false;
+        StateHasChanged();
+    }
+
+    private Task RefreshDevicesAsync()
+    {
+        // If the user clicks refresh, we just re-fetch without logging as a connect/disconnect 
+        // to avoid duplicate logs if OS events are already active.
+        return Task.Run(() => 
+        {
+            UsbService.CheckDeviceChanges();
+            devices = UsbService.CurrentDevices;
+        });
+    }
+
+    public void Dispose()
+    {
+        UsbService.OnHistoryUpdated -= HandleHistoryUpdated;
+    }
+}
