@@ -1,0 +1,34 @@
+name: Build and Release
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '10.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore USBDeviceLogApp.csproj -r win-x64
+
+    - name: Build
+      run: dotnet build USBDeviceLogApp.csproj --configuration Release -r win-x64 --no-restore
+
+    - name: Publish Single-File Exe
+      run: dotnet publish USBDeviceLogApp.csproj --configuration Release -r win-x64 --no-build -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true --self-contained true --output ${{ github.workspace }}\publish
+
+    - name: Upload Build Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: USBDeviceLogApp-Release
+        path: ${{ github.workspace }}\publish
