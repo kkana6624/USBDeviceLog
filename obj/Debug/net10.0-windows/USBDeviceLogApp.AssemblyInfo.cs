@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("USBDeviceLogApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1e0ff1c8f581b7b8a479b1b58a2800d951db114d")]
 [assembly: System.Reflection.AssemblyProductAttribute("USBDeviceLogApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("USBDeviceLogApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -8,6 +8,15 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>USBDeviceLogApp</RootNamespace>
     <NoWarn>$(NoWarn);MSB3277</NoWarn>
+    
+    <!-- Build Optimization -->
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>true</SelfContained>
+    <PublishSingleFile>true</PublishSingleFile>
+    <PublishTrimmed>true</PublishTrimmed>
+    <TrimMode>partial</TrimMode>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+    <_SuppressWinFormsTrimError>true</_SuppressWinFormsTrimError>
   </PropertyGroup>
 
   <ItemGroup>

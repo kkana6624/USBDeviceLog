@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "KUED79v3Ujg=",
+  "dgSpecHash": "0WIsyZRrBMw=",
   "success": true,
   "projectFilePath": "C:\\Users\\kkana\\source\\repos\\USBDeviceLog\\USBDeviceLogApp.csproj",
   "expectedPackageFiles": [
@@ -33,8 +33,12 @@
     "C:\\Users\\kkana\\.nuget\\packages\\microsoft.extensions.primitives\\10.0.0\\microsoft.extensions.primitives.10.0.0.nupkg.sha512",
     "C:\\Users\\kkana\\.nuget\\packages\\microsoft.extensions.validation\\10.0.0\\microsoft.extensions.validation.10.0.0.nupkg.sha512",
     "C:\\Users\\kkana\\.nuget\\packages\\microsoft.jsinterop\\10.0.0\\microsoft.jsinterop.10.0.0.nupkg.sha512",
+    "C:\\Users\\kkana\\.nuget\\packages\\microsoft.net.illink.tasks\\10.0.5\\microsoft.net.illink.tasks.10.0.5.nupkg.sha512",
     "C:\\Users\\kkana\\.nuget\\packages\\microsoft.web.webview2\\1.0.3179.45\\microsoft.web.webview2.1.0.3179.45.nupkg.sha512",
-    "C:\\Users\\kkana\\.nuget\\packages\\system.management\\10.0.5\\system.management.10.0.5.nupkg.sha512"
+    "C:\\Users\\kkana\\.nuget\\packages\\system.management\\10.0.5\\system.management.10.0.5.nupkg.sha512",
+    "C:\\Users\\kkana\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\10.0.5\\microsoft.netcore.app.runtime.win-x64.10.0.5.nupkg.sha512",
+    "C:\\Users\\kkana\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\10.0.5\\microsoft.windowsdesktop.app.runtime.win-x64.10.0.5.nupkg.sha512",
+    "C:\\Users\\kkana\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\10.0.5\\microsoft.aspnetcore.app.runtime.win-x64.10.0.5.nupkg.sha512"
   ],
   "logs": []
 }

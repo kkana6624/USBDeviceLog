@@ -14,10 +14,12 @@
     <SourceRoot Include="C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages\" />
   </ItemGroup>
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)microsoft.net.illink.tasks\10.0.5\build\Microsoft.NET.ILLink.Tasks.props" Condition="Exists('$(NuGetPackageRoot)microsoft.net.illink.tasks\10.0.5\build\Microsoft.NET.ILLink.Tasks.props')" />
     <Import Project="$(NuGetPackageRoot)microsoft.aspnetcore.components.webview\10.0.0\buildTransitive\Microsoft.AspNetCore.Components.WebView.props" Condition="Exists('$(NuGetPackageRoot)microsoft.aspnetcore.components.webview\10.0.0\buildTransitive\Microsoft.AspNetCore.Components.WebView.props')" />
     <Import Project="$(NuGetPackageRoot)microsoft.aspnetcore.components.webview.windowsforms\10.0.51\build\Microsoft.AspNetCore.Components.WebView.WindowsForms.props" Condition="Exists('$(NuGetPackageRoot)microsoft.aspnetcore.components.webview.windowsforms\10.0.51\build\Microsoft.AspNetCore.Components.WebView.WindowsForms.props')" />
   </ImportGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <PkgMicrosoft_Web_WebView2 Condition=" '$(PkgMicrosoft_Web_WebView2)' == '' ">C:\Users\kkana\.nuget\packages\microsoft.web.webview2\1.0.3179.45</PkgMicrosoft_Web_WebView2>
+    <PkgMicrosoft_NET_ILLink_Tasks Condition=" '$(PkgMicrosoft_NET_ILLink_Tasks)' == '' ">C:\Users\kkana\.nuget\packages\microsoft.net.illink.tasks\10.0.5</PkgMicrosoft_NET_ILLink_Tasks>
   </PropertyGroup>
 </Project>
